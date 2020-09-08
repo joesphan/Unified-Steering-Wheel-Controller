@@ -1,6 +1,6 @@
 #include "Joystick.h"
-#define MAX_STEPS 720
-#define MAX_FULL_STEPS (MAX_STEPS * 2)
+#define MAX_STEPS 15000                         //maximum number of steps one way
+#define MAX_FULL_STEPS (MAX_STEPS * 2)        //max number of steps total
 
 
 
@@ -12,12 +12,10 @@ void setup() {
   Serial.begin(9600);
 //inits
   JoystickInit();
-  BridgeDriverInit();
   EncoderDriverInit();
 }
 
 void loop() {
   SendSerial(Steps, forces[0]);
   JoystickRun();
-  BridgeDriver(forces[0]);
 }

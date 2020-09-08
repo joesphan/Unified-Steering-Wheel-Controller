@@ -1,25 +1,31 @@
-//#define ANGLE_DEG_PER_STEP 0.75   //480 steps per 360 degree turn, 1:8 drill gearbox
+/*
+ * Gets the rotary encoder feedback from the servo drive
+ * 
+ */
 #define ENCODER1_PIN 2          //must support external interrupt
 #define ENCODER2_PIN 3          // ""    ""       ""       ""
-int Steps = 0;
-byte CurrentStep;
+byte encoderState;
+int Position;                 //position of rotor
 
 /*
    EncoderDriverInit
    initilization(duh)
 */
 void EncoderDriverInit() {
-  Calibrate();
   pinMode(ENCODER1_PIN, INPUT);
   pinMode(ENCODER2_PIN, INPUT);
   attachInterrupt(digitalPinToInterrupt(ENCODER1_PIN), UpdateSteps, CHANGE);
   attachInterrupt(digitalPinToInterrupt(ENCODER2_PIN), UpdateSteps, CHANGE);
+  encoderState = 0;                                         //preset 0
+  bitWrite(encoderState, 0, digitalRead(encoderPin2));      //initial write
+  bitWrite(encoderState, 1, digitalRead(encoderPin1));      //initial write
+  Position = 0;
 }
 
 /*
     UpdateSteps
     Updates CurrentStep with the current num steps from rotary encoder
-    !!!Call on change only!!!
+    Interrupt driven
     Order:
       {Encoder1, Encoder2}
         00
@@ -30,53 +36,52 @@ void EncoderDriverInit() {
         repeat
 */
 void UpdateSteps() {
-  byte dataIn;
-  bitWrite(dataIn, 0, digitalRead(ENCODER1_PIN));
-  bitWrite(dataIn, 1, digitalRead(ENCODER1_PIN));
-  CurrentStep = CurrentStep & B00000011;             //bit mask
-  switch (CurrentStep) {
-    case B00:
-      switch (dataIn) {
-        case B10:
-          Steps++;
+  byte readState;    //new position
+  bitWrite(readState, 0, digitalRead(ENCODER1_PIN));
+  bitWrite(readState, 1, digitalRead(ENCODER2_PIN));
+  switch (encoderState) {
+    case B00000000:
+      switch (readState) {
+        case B00000001:
+          Position++;
           break;
-        case B01:
-          Steps--;
-          break;
-      }
-      break;
-    case B01:
-      switch (dataIn) {
-        case B00:
-          Steps++;
-          break;
-        case B11:
-          Steps--;
+        case B00000010:
+          Position--;
           break;
       }
       break;
-    case B11:
-      switch (dataIn) {
-        case B01:
-          Steps++;
+    case B00000001:
+      switch (readState) {
+        case B00000011:
+          Position++;
           break;
-        case B10:
-          Steps--;
+        case B00000000:
+          Position--;
           break;
       }
       break;
-    case B10:
-      switch (dataIn) {
-        case B11:
-          Steps++;
+    case B00000011:
+      switch (readState) {
+        case B00000010:
+          Position++;
           break;
-        case B00:
-          Steps--;
+        case B00000001:
+          Position--;
+          break;
+      }
+      break;
+    case B00000010:
+      switch (readState) {
+        case B00000000:
+          Position++;
+          break;
+        case B00000011:
+          Position--;
           break;
       }
       break;
   }
-  CurrentStep = dataIn;
+  encoderState = readState;
 }
 
 /*
@@ -84,7 +89,7 @@ void UpdateSteps() {
    Sets current steering wheel position as angle 0
 */
 void Calibrate() {
-  Steps = 0;
+  Position = 0;
 }
 
 /*
