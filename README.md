@@ -14,6 +14,7 @@
 - wheel damping adjustment
 - flowchart
 - figure out how to drop the 220v transformer
+- wheel buttons, pedals, shifter
 
 ## Theory of Operation
 
