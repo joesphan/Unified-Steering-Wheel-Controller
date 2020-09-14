@@ -20,7 +20,7 @@
 
 -Atmega 32u4
 
--[FFB Library](https://github.com/YukMingLaw/ArduinoJoystickWithFFBLibrary) (thanks!)
+-[FFB Library](https://github.com/joesphan/ArduinoJoystickWithFFBLibrary) (thanks to the original author)
 
 -Big mige 130st
 
