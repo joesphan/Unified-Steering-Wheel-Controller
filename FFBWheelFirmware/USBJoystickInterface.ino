@@ -7,17 +7,18 @@ Gains mygains[2];
 EffectParams myeffectparams[2];
 int32_t forces[2] = {0};
 int32_t friction[2] = {0};
-
+extern int Position;
 void JoystickInit() {
+  Joystick.setFFBRange(2048);
   Joystick.setXAxisRange(-MAX_STEPS, MAX_STEPS);
-  mygains[0].totalGain = 100;//0-100
+  mygains[0].totalGain = 800;
   Joystick.setGains(mygains);
   Joystick.begin();
-  myeffectparams[0].springMaxPosition = MAX_FULL_STEPS;
+  myeffectparams[0].springMaxPosition = MAX_STEPS;
 }
 void JoystickRun() {
-  myeffectparams[0].springPosition = Steps;
+  myeffectparams[0].springPosition = Position;
   Joystick.setEffectParams(myeffectparams);
   Joystick.getForce(forces);
-  Joystick.setXAxis(Steps);
+  Joystick.setXAxis(Position);
 }

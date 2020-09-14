@@ -2,10 +2,15 @@
  * Gets the rotary encoder feedback from the servo drive
  * 
  */
-#define ENCODER1_PIN 2          //must support external interrupt
-#define ENCODER2_PIN 3          // ""    ""       ""       ""
+
+
 byte encoderState;
 int Position;                 //position of rotor
+
+uint32_t previousMicros = 0;
+uint32_t stepTime;
+
+int motorEN = false;
 
 /*
    EncoderDriverInit
@@ -17,8 +22,8 @@ void EncoderDriverInit() {
   attachInterrupt(digitalPinToInterrupt(ENCODER1_PIN), UpdateSteps, CHANGE);
   attachInterrupt(digitalPinToInterrupt(ENCODER2_PIN), UpdateSteps, CHANGE);
   encoderState = 0;                                         //preset 0
-  bitWrite(encoderState, 0, digitalRead(encoderPin2));      //initial write
-  bitWrite(encoderState, 1, digitalRead(encoderPin1));      //initial write
+  bitWrite(encoderState, 0, digitalRead(ENCODER2_PIN));      //initial write
+  bitWrite(encoderState, 1, digitalRead(ENCODER1_PIN));      //initial write
   Position = 0;
 }
 
@@ -81,9 +86,25 @@ void UpdateSteps() {
       }
       break;
   }
+  uint32_t newMicros = micros();
+  stepTime = newMicros - previousMicros;
+  previousMicros = newMicros;
   encoderState = readState;
+  //overspeed detection
+  if (getSpeed() > MAX_RPM) {
+    motorEN = false;
+  } else {
+    motorEN = true;
+  }
 }
 
+/*
+ * getSpeed
+ * returns the speed in rpm
+ */
+uint32_t getSpeed() {
+  return (RPM_DIVIDEND / stepTime);
+}
 /*
    Calibrate
    Sets current steering wheel position as angle 0
@@ -99,10 +120,10 @@ void Calibrate() {
    negative is past left full lock
 */
 int CheckMaxAngle() {
-  int pastAmount = abs(Steps) - MAX_STEPS;
-  if (pastAmount >= 0 && Steps > 0) {     //past right full lock
+  int pastAmount = abs(Position) - MAX_STEPS;
+  if (pastAmount >= 0 && Position > 0) {     //past right full lock
     //no need to do anything, as steps is positive
-  } else if (pastAmount >= 0 && Steps < 0) {
+  } else if (pastAmount >= 0 && Position < 0) {
     pastAmount = -pastAmount;
   } else {                                //return 0 if all the checks pass, not past full lock
     pastAmount = 0;
