@@ -15,6 +15,7 @@
 - flowchart
 - figure out how to drop the 220v transformer
 - wheel buttons, pedals, shifter
+- add center wheel button
 
 ## Theory of Operation
 
