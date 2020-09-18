@@ -41,6 +41,11 @@ The interface board's output is a differential +/-10V signal to control the moto
 
 I've tested using interrupts, and they work mighty fine with the 10,000ppr encoder. Through the servo's communication interface, there is two pins that output an encoder signal.
 
+## Shifter Paddles
+- 433mhz wireless
+- 6 bolt pattern mount
+- attiny13 uC
+
 ## Code Documentation
 
 
