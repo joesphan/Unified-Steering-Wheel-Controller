@@ -25,7 +25,9 @@
 
 -Big mige 130st
 
--2 bay NAS chassis for housing
+-cutomizable and expandable controller
+
+-wireless perhipheral add-ons
 
 
 
