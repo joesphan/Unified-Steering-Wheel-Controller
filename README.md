@@ -15,7 +15,7 @@
 - documentation of code
 - wheel damping adjustment
 - figure out how to drop the 220v transformer
-- add center wheel button
+- add calibrate wheel button, gain adjustment potentiomter, etc.
 
 ## Theory of Operation
 
