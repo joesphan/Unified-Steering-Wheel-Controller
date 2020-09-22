@@ -1,4 +1,4 @@
-# Custom Steering Wheel
+# Unified Sim Controller
 
 ##### Done:
 
@@ -18,6 +18,8 @@
 - add center wheel button
 
 ## Theory of Operation
+
+Controller for FFB wheel and peripherals
 
 -Atmega 32u4
 
