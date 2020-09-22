@@ -7,14 +7,14 @@
 - firmware mostly complete
 - overspeed safety implemented
 - endstop damping implemented
+- flowchart
+- Wireless perhipherals: wheel buttons, pedals, shifter
 
 ##### Todo:
 
 - documentation of code
 - wheel damping adjustment
-- flowchart
 - figure out how to drop the 220v transformer
-- wheel buttons, pedals, shifter
 - add center wheel button
 
 ## Theory of Operation
