@@ -16,6 +16,8 @@
 - wheel damping adjustment
 - figure out how to drop the 220v transformer
 - add calibrate wheel button, gain adjustment potentiomter, etc.
+- PCB boards
+- standardized enclosure
 
 ## Theory of Operation
 
