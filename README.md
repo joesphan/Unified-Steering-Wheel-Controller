@@ -44,3 +44,7 @@ Run with interrupts from servo drive. Two phase bog standard signal.
 ## Code Documentation
 
 under \Documentation
+
+## DIY kits and fully assembled
+
+Want to help me pay for my tuition? DIY kits and fully assembled controller kits will be available soon. It will include a case and everything you need to assemble/PnP yourself. Target cost is around $50.
