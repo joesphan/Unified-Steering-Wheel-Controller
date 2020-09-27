@@ -1,2 +1,1 @@
-https://www.airspayce.com/mikem/arduino/RadioHead/index.html
 https://github.com/joesphan/ArduinoJoystickWithFFBLibrary

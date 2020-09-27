@@ -1,3 +1,4 @@
+#include "defines.h"
 /*
  * Gets the rotary encoder feedback from the servo drive
  * 

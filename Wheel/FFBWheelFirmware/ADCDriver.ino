@@ -1,3 +1,4 @@
+#include "defines.h"
 /*
    ADCDriver: 12 bit adc driver for the atmega32u4
 */

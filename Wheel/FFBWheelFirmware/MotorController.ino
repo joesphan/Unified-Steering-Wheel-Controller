@@ -1,3 +1,4 @@
+#include "defines.h"
 /*
      MotorController: controls the servo drive
 */

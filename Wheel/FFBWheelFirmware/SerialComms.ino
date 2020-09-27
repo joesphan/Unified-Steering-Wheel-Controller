@@ -1,3 +1,4 @@
+#include "defines.h"
 /*
    sends MCU data over to serial, for debug or other purposes
 */
