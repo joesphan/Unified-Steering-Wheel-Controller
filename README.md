@@ -1,5 +1,7 @@
 # Unified Sim Controller
 
+# Due to safety concerns with the mige 30 servo, this project was abandoned. The story goes is a bug occured, the wheel flung off, and drove into my monitor. In the future I might revisit with a appropriate sized servo motor.
+
 ##### Done:
 
 - hardware done
